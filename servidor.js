@@ -1,10 +1,10 @@
 //Servidor con express
 const express = require("express");
 const http = require("http");
-//var cors = require('cors')
+var cors = require('cors')
 const app = express();
 
-//app.use(cors());
+app.use(cors());
 
 
 // puerto de la app
@@ -13,11 +13,16 @@ const PORT = process.env.PORT || 5000;
 const servidor = http.createServer(app);
 
 //Inicializamos socketio
-// const socketio = require("socket.io");
-// const io = socketio(servidor);
-var io = require('socket.io')(servidor, {
-  origins: '*:*'
-});
+//const socketio = require("socket.io");
+//const io = socketio(servidor);
+const io = require("socket.io")(servidor, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true
+  }
+})
 
 //Funcionalidad de socket.io en el servidor
 io.on("connection", (socket) => {
