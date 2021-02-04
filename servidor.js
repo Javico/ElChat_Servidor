@@ -1,10 +1,10 @@
 //Servidor con express
 const express = require("express");
 const http = require("http");
-var cors = require('cors')
+//var cors = require('cors')
 const app = express();
 
-app.use(cors());
+//app.use(cors());
 
 
 // puerto de la app
@@ -16,12 +16,16 @@ const servidor = http.createServer(app);
 // const socketio = require("socket.io");
 // const io = socketio(servidor);
 var io = require('socket.io')(servidor, {
-  cors: {
-    origin: "https://vibrant-wescoff-e62366.netlify.app/",
-    methods: ["GET","HEAD","PUT","PATCH","POST","DELETE"],
-    allowedHeaders: ["my-custom-header"],
-    credentials: true
-  }
+    origins: ["https://vibrant-wescoff-e62366.netlify.app/"],
+    handlePreflightRequest: (req, res) => {
+      res.writeHead(200, {
+        "Access-Control-Allow-Origin": "https://vibrant-wescoff-e62366.netlify.app/",
+        "Access-Control-Allow-Methods": "GET,POST",
+        "Access-Control-Allow-Headers": "my-custom-header",
+        "Access-Control-Allow-Credentials": true
+      });
+      res.end();
+    }
 });
 
 //Funcionalidad de socket.io en el servidor
