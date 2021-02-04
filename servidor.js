@@ -3,11 +3,8 @@ const express = require("express");
 const http = require("http");
 var cors = require('cors')
 const app = express();
-var corsOptions = {
-  origin: '*',
-  credentials: true };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 
 // puerto de la app
@@ -16,8 +13,9 @@ const PORT = process.env.PORT || 5000;
 const servidor = http.createServer(app);
 
 //Inicializamos socketio
-const socketio = require("socket.io");
-const io = socketio(servidor);
+// const socketio = require("socket.io");
+// const io = socketio(servidor);
+var io = require('socket.io')(servidor);
 
 //Funcionalidad de socket.io en el servidor
 io.on("connection", (socket) => {
