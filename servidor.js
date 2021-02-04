@@ -16,10 +16,10 @@ const servidor = http.createServer(app);
 // const socketio = require("socket.io");
 // const io = socketio(servidor);
 var io = require('socket.io')(servidor, {
-    origins: ["https://vibrant-wescoff-e62366.netlify.app/"],
+    origins: ["https://vibrant-wescoff-e62366.netlify.app"],
     handlePreflightRequest: (req, res) => {
       res.writeHead(200, {
-        "Access-Control-Allow-Origin": "https://vibrant-wescoff-e62366.netlify.app/",
+        "Access-Control-Allow-Origin": "https://vibrant-wescoff-e62366.netlify.app",
         "Access-Control-Allow-Methods": "GET,POST",
         "Access-Control-Allow-Headers": "my-custom-header",
         "Access-Control-Allow-Credentials": true
