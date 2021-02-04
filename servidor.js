@@ -17,7 +17,7 @@ const servidor = http.createServer(app);
 //const io = socketio(servidor);
 const io = require("socket.io")(servidor, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://vibrant-wescoff-e62366.netlify.app/",
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true
