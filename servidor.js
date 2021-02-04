@@ -3,9 +3,9 @@ const express = require("express");
 const http = require("http");
 var cors = require('cors')
 const app = express();
-const servidor = http.createServer(app);
-
 app.use(cors());
+
+const servidor = http.createServer(app);
 
 //Inicializamos socketio
 const socketio = require("socket.io");
