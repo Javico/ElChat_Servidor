@@ -5,6 +5,7 @@ var cors = require('cors')
 const app = express();
 app.use(cors());
 
+
 const servidor = http.createServer(app);
 
 //Inicializamos socketio
