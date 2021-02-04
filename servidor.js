@@ -17,7 +17,7 @@ const servidor = http.createServer(app);
 //const io = socketio(servidor);
 const io = require("socket.io")(servidor, {
   cors: {
-    origin: "https://vibrant-wescoff-e62366.netlify.app/",
+    origin: `https://vibrant-wescoff-e62366.netlify.app:${PORT}`,
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true
