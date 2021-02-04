@@ -1,8 +1,8 @@
 //Servidor con express
 const express = require("express");
 const http = require("http");
-const app = express();
 var cors = require('cors')
+const app = express();
 
 app.use(cors());
 
@@ -10,14 +10,19 @@ app.use(cors());
 // puerto de la app
 const PORT = process.env.PORT || 5000;
 
-//const servidor = http.createServer(app);
-
-var serverx = app.listen(PORT);
+const servidor = http.createServer(app);
 
 //Inicializamos socketio
 // const socketio = require("socket.io");
 // const io = socketio(servidor);
-var io = require('socket.io').listen(serverx);
+var io = require('socket.io')(servidor, {
+  cors: {
+    origin: "https://vibrant-wescoff-e62366.netlify.app/",
+    methods: ["GET","HEAD","PUT","PATCH","POST","DELETE"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true
+  }
+});
 
 //Funcionalidad de socket.io en el servidor
 io.on("connection", (socket) => {
@@ -47,6 +52,6 @@ io.on("connection", (socket) => {
 
 //servidor.listen(5000, () => console.log("Servidor inicializado"));
 // arrancar la app
-// serverx.listen(PORT, () => {
-//   console.log(`funcionando en el puerto ${PORT}`);
-// });
+servidor.listen(PORT, () => {
+  console.log(`funcionando en el puerto ${PORT}`);
+});
