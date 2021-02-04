@@ -3,7 +3,11 @@ const express = require("express");
 const http = require("http");
 var cors = require('cors')
 const app = express();
-app.use(cors());
+var corsOptions = {
+  origin: '*',
+  credentials: true };
+
+app.use(cors(corsOptions));
 
 
 // puerto de la app
